@@ -1,4 +1,5 @@
 import { REST, Routes } from "discord.js";
+import { handle } from "handlers/slash.js";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { Client, GatewayIntentBits } from "discord.js";
 
@@ -35,10 +36,7 @@ client.on("ready", () => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-
-  if (interaction.commandName === "ping") {
-    await interaction.reply("Pong!");
-  }
+  handle(interaction,client);
 });
 
 client.login(token);
