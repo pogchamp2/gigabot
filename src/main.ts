@@ -23,6 +23,36 @@ const commands = [
         "required": true
       }
     ]
+  },
+  {
+    name: "bank",
+    description: "bank command",
+    options: [
+      {
+        "name": "action",
+        "description": "action? help for a list",
+        "type": 3,
+        "required": false
+      },
+      {
+        "name": "user",
+        "description": "who",
+        "type": 3,
+        "required": false
+      },
+      {
+        "name": "amount",
+        "description": "how money",
+        "type": 4,
+        "required": false
+      },
+      {
+        "name": "to",
+        "description": "who send to??",
+        "type": 3,
+        "required": false
+      }
+    ]
   }
 ];
 
