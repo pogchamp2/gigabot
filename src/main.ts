@@ -11,6 +11,18 @@ const commands = [
   {
     name: "ping",
     description: "Replies with Pong!"
+  },
+  {
+    name: "count",
+    description: "count to a number",
+    options: [
+      {
+        "name": "amount",
+        "description": "How much to count to",
+        "type": 4,
+        "required": true
+      }
+    ]
   }
 ];
 
