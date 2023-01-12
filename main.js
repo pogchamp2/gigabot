@@ -1,7 +1,10 @@
-const token = process.env.DISCORD_TOKEN;
 import { REST, Routes } from "discord.js";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+import { Client, GatewayIntentBits } from "discord.js";
+
 dotenv.config();
+const token = process.env.DISCORD_TOKEN;
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const commands = [
   {
@@ -25,9 +28,6 @@ const rest = new REST({ version: "10" }).setToken(token);
     console.error(error);
   }
 })();
-
-import { Client, GatewayIntentBits } from "discord.js";
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
