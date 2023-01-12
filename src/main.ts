@@ -1,10 +1,10 @@
 import { REST, Routes } from "discord.js";
-import { handle } from "handlers/slash.js";
+import { handle } from "./handlers/slash";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 import { Client, GatewayIntentBits } from "discord.js";
 
 dotenv.config();
-const token = process.env.DISCORD_TOKEN;
+const token = process.env.DISCORD_TOKEN as string;
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const commands = [
@@ -31,12 +31,12 @@ const rest = new REST({ version: "10" }).setToken(token);
 })();
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  console.log(`Logged in as ${client?.user?.tag}!`);
 });
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-  handle(interaction,client);
+  handle(interaction, client);
 });
 
 client.login(token);
