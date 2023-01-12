@@ -1,40 +1,43 @@
-require("dotenv").config();
-var token = process.env.DISCORD_TOKEN;
-const { REST, Routes } = require('discord.js');
+const token = process.env.DISCORD_TOKEN;
+import { REST, Routes } from "discord.js";
+import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
+dotenv.config();
 
 const commands = [
   {
-    name: 'ping',
-    description: 'Replies with Pong!'
-  }
+    name: "ping",
+    description: "Replies with Pong!",
+  },
 ];
 
-const rest = new REST({ version: '10' }).setToken(token);
+const rest = new REST({ version: "10" }).setToken(token);
 
 (async () => {
   try {
-    console.log('Started refreshing application (/) commands.');
+    console.log("Started refreshing application (/) commands.");
 
-    await rest.put(Routes.applicationCommands("1062964956410155069"), { body: commands });
+    await rest.put(Routes.applicationCommands("1062964956410155069"), {
+      body: commands,
+    });
 
-    console.log('Successfully reloaded application (/) commands.');
+    console.log("Successfully reloaded application (/) commands.");
   } catch (error) {
     console.error(error);
   }
 })();
 
-const { Client, GatewayIntentBits } = require('discord.js');
+import { Client, GatewayIntentBits } from "discord.js";
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-client.on('ready', () => {
+client.on("ready", () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on('interactionCreate', async interaction => {
+client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
 
-  if (interaction.commandName === 'ping') {
-    await interaction.reply('Pong!');
+  if (interaction.commandName === "ping") {
+    await interaction.reply("Pong!");
   }
 });
 
