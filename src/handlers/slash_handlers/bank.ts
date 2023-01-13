@@ -2,10 +2,7 @@
 //line in case we need it
 ////const wait = require('node:timers/promises').setTimeout;
 
-//TODO: @UnixPNG or @stephenfjohnson, keep an map of linked users to minecraft names (next line)
-//and save and load it to and from a file and do actions as the correct user.
-
-//TODO: @UnixPNG, add the file saving/loading support
+//TODO: @UnixPNG, add auth for 'link'
 var fs = require("fs");
 import { get } from "../../http";
 var users: { [key: string]: any } = {};
