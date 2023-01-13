@@ -15,6 +15,7 @@ const get = async (url: String) => {
       console.log(response);
 
       const data = response.data;
+      if(typeof data === "object"){return JSON.stringify(data)}
 
       return data;
     })

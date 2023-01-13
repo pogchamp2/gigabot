@@ -21,6 +21,13 @@ const test = async (inter: any, cli: any) => {
         ephemeral: true,
       });
     }
+    if (testType == "slash") {
+      await inter.reply({ content: "ok", ephemeral: true });
+      inter.channel.send("/test bot")
+    }
+    if (testType == "bot") {
+      inter.channel.send("test message")
+    }
   }
 };
 
