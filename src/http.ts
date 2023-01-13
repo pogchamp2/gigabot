@@ -5,12 +5,18 @@ using the axios package.
 Return array: [response (or null), error (or null)]
 */
 
+// Add Types to response
+
 const get = async (url: String) => {
   // const result: Array<any> = []
   const result = axios
     .get(url as any)
-    .then((response: Object) => {
-      return response;
+    .then((response: any) => {
+      console.log(response);
+
+      const data = response.data;
+
+      return data;
     })
     .catch((error: Object) => {
       return error;
