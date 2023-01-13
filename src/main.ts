@@ -13,6 +13,18 @@ const commands = [
     description: "Replies with Pong!"
   },
   {
+    name: "test",
+    description: "test command",
+    options: [
+      {
+        "name": "test",
+        "description": "what to test",
+        "type": 3,
+        "required": true
+      }
+    ]
+  },
+  {
     name: "count",
     description: "count to a number",
     options: [

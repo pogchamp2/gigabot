@@ -1,22 +1,9 @@
 //@UnixPNG => I don't think we'll need this but I'm keeping the
 //line in case we need it
 ////const wait = require('node:timers/promises').setTimeout;
-const axios = require('axios');
-const get = async (url: String) => {
-    let result: Array<String> = []
-    axios.get(url)
-      .then(response => {
-        console.log(response.data.url);
-        console.log(response.data.explanation);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-}
-
-
+import { get } from "../../http";
 //http://66.42.73.191:8080/bank/get?user=UnixTM
-
+//, names: Object
 const bank = async (inter: any, cli: any) => {
     let message: string = "";
     let action: string = inter.options.getString("action");
@@ -26,7 +13,7 @@ const bank = async (inter: any, cli: any) => {
     link <username> - link that user to your discord user
     */
     if(action === "help"){
-      message = "valid actions for bank:\nlink <user> - link that user to your discord user";
+      message = "valid actions for bank:\nname - reply with your linked user\nlink <user> - link that user to your discord user";
     }
     if(action === "link"){
       let user: string = inter.options.getString("user");
