@@ -6,9 +6,18 @@
 //and save and load it to and from a file and do actions as the correct user.
 
 //TODO: @UnixPNG, add the file saving/loading support
-
+var fs = require("fs");
 import { get } from "../../http";
 var users: { [key: string]: any } = {};
+try {
+    fs.readFile("./usersBank.json","utf-8", (err: any, data: any) => {
+        console.log(data)
+        console.error(err)
+        if(data)users = JSON.parse(data)
+    });
+} catch (err: any){
+    console.error(err)
+}
 
 //http://66.42.73.191:8080/bank/get?user=UnixTM&json=true
 //http://66.42.73.191:8080/bank/get?user=UnixTM
@@ -75,7 +84,7 @@ const bank = async (inter: any, cli: any) => {
     }
 
     if(action === "name"){
-        let id: string = inter.user.id.toString()
+        let id: string = inter.user.id.toString();
         try{
             let namez: string = users[id];
             if(namez !== undefined){message = "youre \""+namez+"\"! cool!";}
@@ -89,8 +98,15 @@ const bank = async (inter: any, cli: any) => {
     if(action === "unlink"){
         let id: string = inter.user.id as string;
         let name: string = users[id];
-        users[id] = undefined
-        inter.reply({ content: "ok youre no longer linked to `"+name+"`", ephemeral: true })
+        users[id] = undefined;
+        try {
+            fs.writeFile('./usersBank.json', JSON.stringify(users), (err: any) => {
+                console.error(err)
+            });
+        } catch (err: any){
+            console.error(err)
+        }
+        message = "ok youre no longer linked to `"+name+"`";
     }
 
     if(action === "link"){
@@ -104,6 +120,13 @@ const bank = async (inter: any, cli: any) => {
         users = Object.assign({[id]: user},users);
         console.log(users);
         message = "ok bro ur now linked to \""+user+"\"";
+        try {
+            fs.writeFile('./usersBank.json', JSON.stringify(users), (err: any) => {
+                console.error(err)
+            });
+        } catch (err: any){
+            console.error(err)
+        }
         }
       }
     }
