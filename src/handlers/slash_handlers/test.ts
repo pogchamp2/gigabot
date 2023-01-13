@@ -15,11 +15,33 @@ const test = async (inter: any, cli: any) => {
     if (testType == "id") {
       await inter.reply({ content: inter.user.id.toString(), ephemeral: true });
     }
+
+    // const obj = JSON.stringify(content);
+
+    // const entries = Object.entries(content);
+
+    // for await (const [key, value] of Object.entries(content)) {
+    //   str.concat(`${key}: ${value}`);
+    // }
+
     if (testType == "http") {
-      await inter.reply({
-        content: (await get("http://66.42.73.191:8080/")).toString(),
-        ephemeral: true,
-      });
+      const func = async () => {
+        const content = await get("http://66.42.73.191:8080/");
+        let str = "meme";
+        for (const [key, value] of Object.entries(content)) {
+          str = str.concat(`${key}: ${value}\n`);
+        }
+        return str;
+      };
+
+      const main = async () => {
+        const result = await func();
+        await inter.reply({
+          content: result,
+          ephemeral: true,
+        });
+      };
+      main();
     }
   }
 };
