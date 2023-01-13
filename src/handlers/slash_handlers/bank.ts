@@ -32,7 +32,7 @@ const bank = async (inter: any, cli: any) => {
       message = "valid actions for bank:\nname - reply with your linked user\nlink <user> - link that user to your discord user\nget - get your bank balance\nsend <amount> <to> - send $<amount> money™ to <to>";
     }
 
-    if(action === "send"){
+    else if(action === "send"){
         let id: string = inter.user.id.toString();
         let namez: string = users[id];
         let to: string = inter.options.getString("to");
@@ -67,7 +67,7 @@ const bank = async (inter: any, cli: any) => {
         }
     }
 
-    if(action === "get"){
+    else if(action === "get"){
         let id: string = inter.user.id.toString();
         let namez: string = users[id];
         if(namez !== undefined){
@@ -80,7 +80,7 @@ const bank = async (inter: any, cli: any) => {
         }
     }
 
-    if(action === "name"){
+    else if(action === "name"){
         let id: string = inter.user.id.toString();
         try{
             let namez: string = users[id];
@@ -92,7 +92,7 @@ const bank = async (inter: any, cli: any) => {
         }
     }
 
-    if(action === "unlink"){
+    else if(action === "unlink"){
         let id: string = inter.user.id as string;
         let name: string = users[id];
         users[id] = undefined;
@@ -106,7 +106,7 @@ const bank = async (inter: any, cli: any) => {
         message = "ok youre no longer linked to `"+name+"`";
     }
 
-    if(action === "link"){
+    else if(action === "link"){
       let user: string = inter.options.getString("user");
       if(user === "" || user === null || user === undefined){message = "You must provide a user.";}
       else {
@@ -127,6 +127,8 @@ const bank = async (inter: any, cli: any) => {
         }
       }
     }
+    else{message = "Invalid action"}
+    message ??= "there was an issue"
 
     await inter.reply({ content: message, ephemeral: true });
 }
