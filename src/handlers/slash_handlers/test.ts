@@ -27,7 +27,7 @@ const test = async (inter: any, cli: any) => {
     if (testType == "http") {
       const func = async () => {
         const content = await get("http://66.42.73.191:8080/");
-        let str = "meme";
+        let str = "";
         for (const [key, value] of Object.entries(content)) {
           str = str.concat(`${key}: ${value}\n`);
         }
@@ -45,10 +45,10 @@ const test = async (inter: any, cli: any) => {
     }
     if (testType == "slash") {
       await inter.reply({ content: "ok", ephemeral: true });
-      inter.channel.send("/test bot")
+      inter.channel.send("/test bot");
     }
     if (testType == "bot") {
-      inter.channel.send("test message")
+      inter.channel.send("test message");
     }
   }
 };
