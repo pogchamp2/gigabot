@@ -44,7 +44,7 @@ const commands = [
         "name": "action",
         "description": "action? help for a list",
         "type": 3,
-        "required": false
+        "required": true
       },
       {
         "name": "user",

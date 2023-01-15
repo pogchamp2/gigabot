@@ -40,7 +40,7 @@ const bank = async (inter: any, cli: any) => {
         let cantAfford: any = {"status":"not enough"}
         let err: string = "error"
         if(namez !== undefined){
-            var sent: any = await get("http://66.42.73.191:8080/bank/transfer?from="+namez+"&to="+to+"&amount="+money.toString());
+            var sent: any = await get("http://66.42.73.191:8080/bank/transfer?from="+namez+"&amount="+money.toString()+"&to="+to);
             if(sent == cantAfford){
                 message = "you cant send that much, you dont have that much"
             }
@@ -84,7 +84,7 @@ const bank = async (inter: any, cli: any) => {
         let id: string = inter.user.id.toString();
         try{
             let namez: string = users[id];
-            if(namez !== undefined){message = "youre \""+namez+"\"! cool!";}
+            if(namez !== undefined){message = "youre `"+namez+"`! cool!";}
             else{message = "you didnt link your account"}
         }
         catch{
@@ -112,11 +112,11 @@ const bank = async (inter: any, cli: any) => {
       else {
         let id: string = inter.user.id as string;
         let namez: string = users[id];
-        if(namez !== undefined){message = "you already linked an account"}
-        else{
+        //if(namez !== undefined){message = "you already linked an account"}
+        //else{
         users = Object.assign({[id]: user},users);
         console.log(users);
-        message = "ok bro ur now linked to \""+user+"\"";
+        message = "ok bro ur now linked to `"+user+"`";
         try {
             fs.writeFile('./usersBank.json', JSON.stringify(users), (err: any) => {
                 console.error(err)
@@ -124,7 +124,7 @@ const bank = async (inter: any, cli: any) => {
         } catch (err: any){
             console.error(err)
         }
-        }
+        //}
       }
     }
     else{message = "Invalid action"}

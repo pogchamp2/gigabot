@@ -45,9 +45,10 @@ const test = async (inter: any, cli: any) => {
     }
     if (testType == "slash") {
       await inter.reply({ content: "ok", ephemeral: true });
-      inter.channel.send("/test bot");
+      inter.channel.send("/test test:bot");
     }
     if (testType == "bot") {
+      await inter.reply({ content: "sending the test message", ephemeral: true});
       inter.channel.send("test message");
     }
   }
